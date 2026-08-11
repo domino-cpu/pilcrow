@@ -1,0 +1,31 @@
+{
+  "name": "therapist-template-02-tender",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tender — Pilcrow Studio therapist website template for emerging practitioners.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "lucide-react": "^0.539.0",
+    "motion": "^12.23.12",
+    "next": "^15.5.23",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "resend": "^4.5.1",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.11",
+    "@types/node": "^24.2.0",
+    "@types/react": "^19.1.9",
+    "@types/react-dom": "^19.1.7",
+    "axe-core": "^4.13.0",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.9.2"
+  }
+}

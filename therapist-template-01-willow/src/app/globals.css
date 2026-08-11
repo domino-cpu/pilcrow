@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+/*
+  ============================================================================
+  WILLOW — Design tokens
+  ----------------------------------------------------------------------------
+  To re-skin for a client, override --color-accent / --color-terracotta below
+  (or set brandColorOverride in content/site.ts, which injects vars at runtime).
+  Everything else in /src is driven off these tokens. Do not hardcode hex.
+  ============================================================================
+*/
+
+@theme {
+  /* Palette — earth-toned warm neutrals. Never pure black or pure white. */
+  --color-bg: #f5f0e6; /* Warm cream base */
+  --color-bg-alt: #ede5d5; /* Deeper cream for alternating sections */
+  --color-surface: #ffffff; /* Card surface */
+  --color-ink: #2c2823; /* Deep bark — primary text */
+  --color-ink-muted: #6b6560; /* Muted supporting text */
+  --color-accent: #7a8a6b; /* Warm sage — primary accent */
+  --color-accent-deep: #556149; /* Darker sage for hover */
+  --color-terracotta: #a0562e; /* Terracotta hot note. Darkened to ~4.8:1 on cream so CTA text passes WCAG AA. */
+  --color-terracotta-deep: #7e3f22; /* Darker terracotta for hover */
+  --color-border: #d9d0bf; /* Warm neutral border */
+
+  /* Typography — wired to next/font CSS variables from layout.tsx */
+  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-body: var(--font-inter), system-ui, -apple-system, sans-serif;
+
+  /* Fluid type scale (clamp handled inline per the spec) */
+  --text-meta: 0.75rem; /* 12px small caps labels */
+
+  /* Layout rhythm */
+  --container-max: 1240px;
+
+  /* Motion */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/*
+  ----------------------------------------------------------------------------
+  Base
+  ----------------------------------------------------------------------------
+*/
+
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-terracotta);
+  color: var(--color-bg);
+}
+
+/*
+  ----------------------------------------------------------------------------
+  Typographic primitives (reusable utility classes)
+  ----------------------------------------------------------------------------
+*/
+
+.font-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--text-meta);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-ink-muted);
+}
+
+.h1-hero {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.75rem, 6vw, 6rem);
+  line-height: 0.95;
+  letter-spacing: -0.015em;
+}
+
+.h2-section {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.25rem, 4vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.h3-sub {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  line-height: 1.1;
+}
+
+.body-lead {
+  font-size: 1.25rem;
+  line-height: 1.55;
+  color: var(--color-ink-muted);
+}
+
+/*
+  ----------------------------------------------------------------------------
+  Accessibility helpers
+  ----------------------------------------------------------------------------
+*/
+
+/* Visible, high-contrast focus ring for keyboard users */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Screen-reader-only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/*
+  ----------------------------------------------------------------------------
+  Motion — fade-in-up on scroll. Component adds .is-visible when in view.
+  Fully disabled under prefers-reduced-motion.
+  ----------------------------------------------------------------------------
+*/
+
+/*
+  Content is fully visible by default (no-JS, no-CSS-animation safe, good for
+  SEO and crawlers). Only when JS is confirmed (html.js, set by an inline
+  script before paint) do we hide-then-reveal. This prevents any chance of
+  content being stuck invisible if scripts fail.
+*/
+.reveal {
+  transition:
+    opacity 600ms var(--ease-out-soft),
+    transform 600ms var(--ease-out-soft);
+}
+
+:root.js .reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: opacity, transform;
+}
+
+:root.js .reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  :root.js .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

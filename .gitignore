@@ -1,0 +1,32 @@
+# Dependencies
+**/node_modules/
+.pnp
+.pnp.*
+
+# Next.js build output
+**/.next/
+**/out/
+**/build/
+
+# Env files (never commit real keys)
+**/.env
+**/.env*.local
+
+# TypeScript
+**/*.tsbuildinfo
+**/next-env.d.ts
+
+# Vercel
+**/.vercel
+
+# OS
+.DS_Store
+*.pem
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Internal Pilcrow build specs (not for the public repo)
+therapist-templates-*.md

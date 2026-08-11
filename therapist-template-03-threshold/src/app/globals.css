@@ -1,0 +1,268 @@
+@import "tailwindcss";
+
+/*
+  ============================================================================
+  THRESHOLD — Design tokens
+  ----------------------------------------------------------------------------
+  Editorial magazine gravity for specialty practitioners. Re-skin by overriding
+  --color-accent (teal) / --color-ochre below (or brandColorOverride in site.ts).
+  ============================================================================
+*/
+
+@theme {
+  /* Palette — editorial gravity. Deep teal = expertise. Ochre = warmth + rigor. */
+  --color-bg: #f7f2e7; /* Warm off-white paper */
+  --color-bg-alt: #ebe4d2; /* Slightly deeper section band */
+  --color-surface: #ffffff;
+  --color-ink: #1a1a1a; /* Deep charcoal, near-black */
+  --color-ink-muted: #4a4a48; /* Muted charcoal */
+  --color-accent: #1f3a3d; /* Deep teal, primary brand */
+  --color-accent-deep: #16292b; /* Darker teal for hover */
+  --color-ochre: #a97d34; /* Warm ochre (darkened from spec for AA on paper) */
+  --color-ochre-deep: #8a6626; /* Deeper ochre for hover */
+  --color-border: #d8cfb8; /* Neutral warm border */
+
+  /* Typography — wired to next/font variables from layout.tsx */
+  --font-display: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  --font-body: var(--font-inter), system-ui, -apple-system, sans-serif;
+
+  --text-meta: 0.75rem;
+  --container-max: 1320px; /* Widest of the three, magazine-scale */
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/*
+  ----------------------------------------------------------------------------
+  Base
+  ----------------------------------------------------------------------------
+*/
+
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem; /* 17px, larger/editorial body */
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background-color: var(--color-ochre);
+  color: var(--color-bg);
+}
+
+/*
+  ----------------------------------------------------------------------------
+  Typographic primitives
+  ----------------------------------------------------------------------------
+*/
+
+.font-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--text-meta);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--color-ink-muted);
+}
+
+.h1-hero {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(3rem, 8vw, 7.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+.h2-section {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+
+.h3-sub {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  line-height: 1.1;
+}
+
+.callout-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.body-lead {
+  font-size: 1.375rem;
+  line-height: 1.5;
+  color: var(--color-ink-muted);
+}
+
+.reading {
+  max-width: 42.5rem; /* ~680px per the Threshold spec */
+}
+
+/* Drop-cap for long-form essay first paragraph. */
+.dropcap::first-letter {
+  font-family: var(--font-display);
+  font-weight: 400;
+  float: left;
+  font-size: 3.6em;
+  line-height: 0.72;
+  padding: 0.05em 0.1em 0 0;
+  color: var(--color-accent);
+}
+
+/*
+  ----------------------------------------------------------------------------
+  Accessibility helpers
+  ----------------------------------------------------------------------------
+*/
+
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-ochre-deep);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/*
+  ----------------------------------------------------------------------------
+  Motion — restrained but purposeful (32px travel, 700ms). JS-gated.
+  ----------------------------------------------------------------------------
+*/
+
+.reveal {
+  transition:
+    opacity 700ms var(--ease-out-soft),
+    transform 700ms var(--ease-out-soft);
+}
+
+:root.js .reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  will-change: opacity, transform;
+}
+
+:root.js .reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/*
+  Curtain-wipe hero reveal: an ochre panel slides across and reveals the H1.
+  Runs once on load. Text is fully visible without JS / under reduced motion.
+*/
+.curtain {
+  position: relative;
+  display: inline-block;
+}
+
+:root.js .curtain > .curtain-text {
+  opacity: 0;
+}
+
+:root.js .curtain.is-revealed > .curtain-text {
+  animation: curtain-text 10ms 520ms forwards;
+}
+
+:root.js .curtain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-ochre);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+:root.js .curtain.is-revealed::after {
+  animation: curtain-wipe 1040ms var(--ease-out-soft) forwards;
+}
+
+@keyframes curtain-text {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes curtain-wipe {
+  0% {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  50% {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  50.01% {
+    transform-origin: right;
+  }
+  100% {
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  :root.js .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  :root.js .curtain > .curtain-text {
+    opacity: 1;
+  }
+  :root.js .curtain::after,
+  :root.js .curtain.is-revealed::after {
+    animation: none;
+    display: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
