@@ -36,10 +36,9 @@ export const metadata: Metadata = {
     description: site.tagline,
     images: ["/images/og-image.jpg"],
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: site.demoMode
+    ? { index: false, follow: false, nocache: true }
+    : { index: true, follow: true },
 };
 
 export default function RootLayout({

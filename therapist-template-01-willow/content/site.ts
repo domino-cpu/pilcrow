@@ -15,6 +15,10 @@ export const site: Site = {
 
   showPilcrowCredit: true,
 
+  // Showcase demo. Set to false when forking for a real client so the site
+  // can be indexed by search engines.
+  demoMode: true,
+
   // Override two or three vars to re-skin per client without touching /src.
   // Example: { accent: "#6a7f8a", terracotta: "#a86b4f" }
   brandColorOverride: null,

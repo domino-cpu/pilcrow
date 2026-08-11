@@ -11,6 +11,10 @@ export const site: Site = {
 
   showTestimonials: false,
   showPilcrowCredit: true,
+
+  // Showcase demo. Set to false when forking for a real client so the site
+  // can be indexed by search engines.
+  demoMode: true,
   brandColorOverride: null,
 
   /* --- Threshold --- */

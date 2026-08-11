@@ -15,6 +15,10 @@ export const site: Site = {
 
   showPilcrowCredit: true,
 
+  // Showcase demo. Set to false when forking for a real client so the site
+  // can be indexed by search engines.
+  demoMode: true,
+
   brandColorOverride: null,
 
   // The Caveat handwritten accents. Keep sparing (max ~2 per page).

@@ -22,6 +22,8 @@ export interface Site {
   showTestimonials: boolean;
   /** Set to false to hide the small "Site by Pilcrow" footer credit. */
   showPilcrowCredit: boolean;
+  /** true = showcase demo: noindex + block crawlers. Set false for a real client. */
+  demoMode: boolean;
   /** Override two or three vars to re-skin without touching the design system. */
   brandColorOverride: BrandColorOverride | null;
 
