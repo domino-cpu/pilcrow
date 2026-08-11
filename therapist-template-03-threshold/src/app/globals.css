@@ -11,16 +11,16 @@
 
 @theme {
   /* Palette — editorial gravity. Deep teal = expertise. Ochre = warmth + rigor. */
-  --color-bg: #f7f2e7; /* Warm off-white paper */
-  --color-bg-alt: #ebe4d2; /* Slightly deeper section band */
+  --color-bg: #f1f3f1; /* Cool crisp near-white paper (gallery/editorial) */
+  --color-bg-alt: #e5eae7; /* Cool section band */
   --color-surface: #ffffff;
-  --color-ink: #1a1a1a; /* Deep charcoal, near-black */
-  --color-ink-muted: #4a4a48; /* Muted charcoal */
+  --color-ink: #18201e; /* Cool near-black (faint teal-charcoal) */
+  --color-ink-muted: #46504d; /* Cool muted charcoal */
   --color-accent: #1f3a3d; /* Deep teal, primary brand */
   --color-accent-deep: #16292b; /* Darker teal for hover */
-  --color-ochre: #a97d34; /* Warm ochre (darkened from spec for AA on paper) */
-  --color-ochre-deep: #8a6626; /* Deeper ochre for hover */
-  --color-border: #d8cfb8; /* Neutral warm border */
+  --color-ochre: #a97d34; /* Warm ochre — the hot note (pops on cool paper) */
+  --color-ochre-deep: #8a6626; /* Deeper ochre for hover / text */
+  --color-border: #d3dad5; /* Cool neutral border */
 
   /* Typography — wired to next/font variables from layout.tsx */
   --font-display: var(--font-newsreader), Georgia, "Times New Roman", serif;

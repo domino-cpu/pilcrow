@@ -12,12 +12,12 @@ const OUT = join(process.cwd(), "public", "images");
 mkdirSync(OUT, { recursive: true });
 
 // Tender palette
-const CREAM = "#FBF7F0";
-const CREAM_DEEP = "#F0E4D2";
+const CREAM = "#FDF6F3";
+const CREAM_DEEP = "#F6E7E1";
 const SAGE = "#7A896B";
-const TERRA = "#C98A5E";
-const INK = "#4A3728";
-const BORDER = "#E4D9C7";
+const TERRA = "#CF8569";
+const INK = "#45362B";
+const BORDER = "#EDDCD5";
 
 function grain(w, h) {
   // Subtle fibrous texture so the placeholder reads like paper, not a flat box.

@@ -12,12 +12,12 @@ const OUT = join(process.cwd(), "public", "images");
 mkdirSync(OUT, { recursive: true });
 
 // Willow palette
-const CREAM = "#F7F2E7";
-const CREAM_DEEP = "#EBE4D2";
+const CREAM = "#F1F3F1";
+const CREAM_DEEP = "#E5EAE7";
 const SAGE = "#1F3A3D";
 const TERRA = "#A97D34";
-const INK = "#1A1A1A";
-const BORDER = "#D8CFB8";
+const INK = "#18201E";
+const BORDER = "#D3DAD5";
 
 function grain(w, h) {
   // Subtle fibrous texture so the placeholder reads like paper, not a flat box.

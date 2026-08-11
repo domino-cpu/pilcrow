@@ -11,16 +11,16 @@
 
 @theme {
   /* Palette — warm paper, cocoa ink, soft sage, blush accent. */
-  --color-bg: #fbf7f0; /* Off-white paper */
-  --color-bg-alt: #f0e4d2; /* Warm blush for sections */
+  --color-bg: #fdf6f3; /* Soft blush-white paper (pink-warm, airy) */
+  --color-bg-alt: #f6e7e1; /* Warmer blush for sections */
   --color-surface: #ffffff;
-  --color-ink: #4a3728; /* Warm cocoa, primary text */
-  --color-ink-muted: #6f5d4a; /* Softer cocoa (darkened for AA body text on paper) */
-  --color-accent: #7a896b; /* Soft sage (darkened slightly for AA on paper) */
+  --color-ink: #45362b; /* Warm cocoa, primary text */
+  --color-ink-muted: #6e5b4c; /* Softer cocoa (AA on blush-white) */
+  --color-accent: #7a896b; /* Soft sage */
   --color-accent-deep: #63704f; /* Deeper sage on hover */
-  --color-blush: #c98a5e; /* Warm blush accent (decorative) */
-  --color-blush-deep: #9a5a30; /* Deep blush for CTA + hover — ~5:1 on paper, WCAG AA */
-  --color-border: #e4d9c7; /* Soft neutral border */
+  --color-blush: #cf8569; /* Warm rose-blush accent (decorative) */
+  --color-blush-deep: #9e5539; /* Deep rose-blush for CTA + hover — WCAG AA on blush-white */
+  --color-border: #eddcd5; /* Soft pink-neutral border */
 
   /* Typography — wired to next/font variables from layout.tsx */
   --font-display: var(--font-cormorant), Georgia, "Times New Roman", serif;
